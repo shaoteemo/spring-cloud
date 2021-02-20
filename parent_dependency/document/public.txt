@@ -1,0 +1,5 @@
+1.Spring Boot运行不同的yml配置文件
+
+        java -jar -Dspring.profiles.active=[-后面的名称。如本项目:eureka-cluster1] jarFile
+
+2.

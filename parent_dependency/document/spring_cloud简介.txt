@@ -1,0 +1,44 @@
+1.SpringCloud是一个 微服务治理 平台，提供对应的一些服务框架。
+    其中包含了：服务注册与发现、配置中心、消息中心、负载均衡、数据监控...
+    其依赖SpringBoot作为基础
+
+2.Netflix
+
+3.Spring Cloud 项目
+    Netflix Eureka：服务注册中心
+    Netflix Ribbon：服务的远程调用，可以负载均衡调用
+    Netflix Hystrix:
+    OpenFeign:Netflix Ribbon的进一步封装
+    Config:配置中心
+    Gateway:
+    kubernetes:Docker管理平台
+    Alibaba:
+
+4.Dubbo与Spring Cloud
+    Dubbo：开发简单，效率高
+    Spring Cloud：功能全面且可靠性高
+
+5.Spring Cloud版本号说明
+
+    推荐使用：RELEASE、Final版本
+    常见软件版本号
+        常见的格式：x.y.z.stage
+
+        x：数字主版本号。当功能模块有较大更新或架构变化时，该版本号会更新。
+        y：数字次版本号。局部变动
+        z：数字修正版本号。Bug Fix
+        stage：希腊字母版本号，也称为阶段版本号。常见的阶段版本包括：BASE、ALPHA、BATE、RELEASE/FINAL
+            BASE：设计阶段
+            ALPHA：初级版本
+            BATE：相对ALPHA有很大改进，消除了严重的Bug，还存在一些潜在的Bug
+            RELEASE/FINAL：最终版--正式版
+
+    SpringCloud版本号
+        格式：版本号命名.stage
+        主框架版本号使用英国地铁站名称的字母自然升序标记。
+        stage：阶段版本号。常见的：BUILD.XXX[SNAPSHOT]、GA、PRE、RC、SR
+            SNAPSHOT：快照版，开发团队内部使用
+            GA：稳定版，基本可使用。不推荐商业使用
+            PRE：里程碑版，有Bug。不推荐商用
+            RC：候选发布版[RC1、RC2、RC3...]。可以考虑。
+            SR：正式发布[SR1、SR2、SR3...]。推荐使用。

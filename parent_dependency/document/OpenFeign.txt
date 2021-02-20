@@ -1,0 +1,36 @@
+OpenFeign
+    一种申明式、模板化的HTTP客户端（仅在Application Client中使用）
+    开发者完全感知不到这是个远程方法，更感知不到这是一个HTTP请求。
+    OpenFeign的应用让SpringCloud微服务调用就像Dubbo一样，Application Client直接
+    通过接口方法远程调用Application Service，而不需要常规的RestTemplate构造请求在
+    解析返回数据。
+
+    OpenFeign基于Ribbon实现，因此很多负载均衡配置与Ribbon保持一致
+
+1.见代码：03-open_feign
+
+
+性能优化
+    GZIP：
+        是一种数据格式，使用deflate算法压缩数据，GZIP时一种流行的数据压缩算法，应用广；
+
+        使用gzip压缩纯文本数据时。大约可以减少70%以上的数据大小。
+
+        可以加快网页的加载速度。
+
+        HTTP协议中的压缩传输
+            客户端请求头：Accept-Encoding:gzip,deflate字段。表示客户端支持压缩格式
+                (gzip或deflate),如果不发送该消息头，服务器不会进行压缩。
+            服务端响应头：Content-Encoding:gzip消息头，表示响应报文是根据该压缩格式压缩过的。
+
+            传输过程中：服务器收到对应的头信息才会压缩，客户端收到对应头信息才会按照压缩格式解析。
+                        否则不压缩，不解码。
+
+
+        配置（open-feign-consumer）：
+            Feign支持Gzip压缩。如果使用GZIP设计两次请求-应答（客户端(Browser)<=>服务客户端(Consumer)<=>服务服务端(Provider)）
+            so只需要在ApplicationClient(服务客户端)配置开启GZIP压缩，来实现压缩数据。
+
+            全局GZIP支持使用的是SpringBoot中的技术：在server标签下开启全局压缩。
+
+负载均衡请求超时时间（open-feign-consumer）

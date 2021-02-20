@@ -1,0 +1,14 @@
+Spring Cloud Gateway
+    网关路由组件，主要用于替代netflix zuul。除了提供统一的路由方式。并且还基于Filter链的方式提供网关基本功能。
+
+    路由：路由信息由：一个ID、URL、一组断言、一组Filter组成。断言为真则说明请求的URL和配置匹配
+
+    过滤器：一个标准的Spring WebFilter回软Global Filter。
+
+1.[gateway-server]访问路由以访问服务：http://ip:port/service name/uri （默认。未手动绑定路由规则）
+
+2.[gateway-server]手动绑定路由规则。
+
+3.Gateway的过滤器分为两种：GatewayFilter和GlobalFilter。前者将应用到单个路由或一组路由上，后者为全局使用
+    多个过滤器根据配文件中的定义来决定执行顺序
+    如提供的自定义过滤器实现Ordered接口，则可通过接口中的getOrder来决定执行顺序。具体顺序通过getOrder方法返回升序排列。

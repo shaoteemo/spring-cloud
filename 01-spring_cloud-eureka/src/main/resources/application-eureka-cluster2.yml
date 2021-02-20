@@ -1,0 +1,16 @@
+server:
+  #Eureka默认走的端口
+  port: 8761
+
+#应用名称
+spring:
+  application:
+    name: cloud for eureka2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster1:8761/eureka/,http://eureka-cluster2:8761/eureka/
+
+  instance:
+    hostname: eureka-cluster2

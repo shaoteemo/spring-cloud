@@ -1,0 +1,32 @@
+#运行端口
+server:
+  port: 90
+
+#配置应用名称
+spring:
+  application:
+    name: HystrixConsumer
+  #请求缓存Redis配置
+  redis:
+    host: 127.0.0.1
+    password: 1111
+#指定注册中心地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.82.1:80/eureka/
+
+#hystrix服务降级
+hystrix:
+  command:
+    default:
+      excution:
+        timeout:
+          #该属性如果为False则交由Ribbon控制
+          enabled: true
+        isolation:
+          thread:
+            #超时熔断时间
+            timeoutInMilliseconds: 1000
+
+

@@ -1,0 +1,41 @@
+1.Ribbon是基于Http和TCP的 客户端 的负载均衡工具
+
+2.Ribbon属于进程级别负载均衡（Nginx使用的是集中负载均衡）
+
+3.Ribbon策略模式
+
+    com.netflix.loadbalancer
+
+    默认使用:轮询策略
+
+    (1).轮询模式： RoundRobinRule
+
+    (2).权重轮询方式：WeightedResponseTimeRule
+        根据每个provider的相应时间分配一个权重，响应时间越长，权重越小
+
+        原理：最开始是轮询策略,并开启一个计时器，每30s收集一次provider的平均响应时间，当信息足够时
+            给每个provider给予权重，然后按权重随机选择provider，高权重被选中的概率越高
+
+    (3).随机策略：RandomRule
+        从服务列表随机选择一个服务
+
+    (4).最少并发数策略：BestAvailableRule（应用在软硬件环境一致的情况下）
+        选择正在请求中的并发数最小的provider。除非这个provider在熔断中。
+
+    (5).在“选定的负载均衡策略”基础上进行重试机制：RetryRule
+        “选定的负载均衡策略”这个策略时轮询（1）策略;
+        该重试策略先设定一个阈值时间。如果在这个阈值时间段内当选择provider不成功，则一直尝试采用轮询最后选择一个可用的provider
+
+    (6).可用性敏感策略（一般在同区域内服务集群环境中使用）：AvailabilityFilteringRule
+        过滤eureka中处于一直连接失败的provider
+        过滤高并发的provider
+
+    (7).区域敏感性策略（用在大型的，物理隔离分布式环境中）：ZoneAvoidanceRule
+        以一个区域为单位考察可用性，对于不可用的区域整个丢弃，从剩下的区域中选择可用provider。
+        如果这个ip域名有一个或多个服务不可达，则选择权重概率大大降低。
+
+4.负载均衡策略配置在服务消费方中配置。
+
+5.Ribbon点对点直连
+
+    所谓的点对点直连即为不使用EurekaServer注册中心直接调用服务提供服务方的方式。

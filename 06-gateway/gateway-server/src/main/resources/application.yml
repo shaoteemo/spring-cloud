@@ -1,0 +1,38 @@
+server:
+  port: 85
+
+spring:
+  application:
+    name: gateway-service
+
+  #Gateway配置
+  cloud:
+    gateway:
+      discovery:
+        locator:
+#          enabled: true #开启Gateway服务（默认路由适配）
+          lower-case-service-id: true #将服务名称转换为小写
+          enabled: false #手动绑定路由规则
+#      自定义路由匹配
+      routes:
+        - id: service-first #任意ID
+          uri: lb://SERVICE-FIRST #服务名称映射
+          predicates:
+            - Path=/msg1/** #映射路径
+          filters: #过滤器注册 过滤器只写前缀(GatewayFilterFactory)之前。
+            - StripPrefix=1
+            - AddRequestParameter=age,30 #参数过滤器
+            - AddRequestParameter=name,ShaoTeemo #多个参数使用多个过滤器。参数值不可有空格。
+            - AddRequestHeader=shaoteemo,1qwec3b34b1j1jk23b1 #内置请求头过滤器
+            - AddRequestParameter=token,ShaoTeemo #自定义token验证过滤器传参数
+            - Authentication=token #自定义token验证过滤器
+        - id: service-second
+          uri: lb://SERVICE-SECOND
+          predicates:
+            - Path=/msg2/**
+          filters:
+            - StripPrefix=1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:80/eureka/

@@ -1,0 +1,27 @@
+1.主要用于服务注册与发现
+
+2.Eureka包含两个组件：Eureka Server和Eureka Client
+
+3.Eureka Server（下称Server）
+    通过Register、Get、Renew等接口提供服务注册、发现和心跳检测等服务。
+
+4.Eureka Client（下称Client）
+    Client启动后会给Server发送频率为默认30秒的心跳包。Server在多个心跳周期（默认3个周期（90秒））没有收到
+        心跳包则会在Eureka中移除该服务节点。
+
+    Client包含两个角色：
+        Application Server(server Provider)：服务提供方，注册到Eureka Server中的服务。
+        Application Client(Server Consumer)：服务消费方，通过Eureka Server发现服务，并消费。
+
+        注意：这两个不是绝对上的定义。在提供服务的时候也可能去消费别的服务，也可能被别的服务消费。角色互换。
+
+5.与zookeeper的对比
+
+    CAP定理：
+
+
+
+Eureka集群原理
+
+
+Eureka优雅停服

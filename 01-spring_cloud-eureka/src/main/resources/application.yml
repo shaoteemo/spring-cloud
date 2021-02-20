@@ -1,0 +1,25 @@
+#单机版测试（关闭服务注册和服务发现功能）
+
+server:
+  #后面项目公共测试端口
+  port: 80
+#Eureka默认走的端口
+#  port: 8761
+#应用名称
+spring:
+  application:
+    name: cloud for eureka
+
+
+#关闭服务发现和注册（单机）
+#eureka:
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#后面项目公共测试配置
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:80

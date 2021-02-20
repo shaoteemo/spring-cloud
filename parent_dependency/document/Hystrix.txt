@@ -1,0 +1,1 @@
+1.使用Open Feign时Hystrix自带只需在配置文件中配置使用Hystrix即可。并且熔断规则在配置文件中配置。
